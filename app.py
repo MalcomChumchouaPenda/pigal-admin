@@ -1,7 +1,7 @@
 
 from core import utils as utl
 from core.config import app, dashboard
-from core.theme.dashboard import layout
+from core.theme.admin.layouts import layout
 from pages.home import constants as cst
 
 

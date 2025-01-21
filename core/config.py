@@ -5,7 +5,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import dash
-# from .theme.dashboard import layout
 
 
 # CONFIGURATION PATHS
@@ -20,13 +19,14 @@ STORE_DIR = os.path.join(_CUR_DIR, 'store')
 # BASIC CONFIGURATION
 
 app = Flask('core.config',
-            template_folder='theme/templates',
-            static_folder='theme/static',
-            static_url_path='/theme/static')
+            template_folder='theme/landing/templates',
+            static_folder='theme/landing/static',
+            static_url_path='/theme/landing/static')
 app.config['SECRET_KEY'] = uuid4().hex
 
 
 # DATABASE CONFIGURATION
+
 db_binds = {}
 for key in os.listdir(SERVICES_DIR):
     service_dir = os.path.join(SERVICES_DIR, key)
@@ -53,11 +53,9 @@ PORTALS = [
 
 # DASHBOARDS CONFIGURATION
 
-prefix = '/dashboard/'
-pages_folder = '../pages/dashboard'
 dashboard = dash.Dash(__name__,
                       server=app,
                       use_pages=True,
-                      pages_folder=pages_folder,
-                      routes_pathname_prefix=prefix)
-# dashboard.layout = layout
+                      pages_folder='../pages/dashboard',
+                      routes_pathname_prefix='/dashboard/',
+                      assets_folder='theme/admin/assets')
