@@ -20,15 +20,15 @@ def stored_file(sname, fname):
     return send_from_directory(pdir, fname)
 
 
-@app.errorhandler(404)
-def not_found(e):
-    print('\n', e)
-    message = "La page que vous recherchez n'existe plus"
-    actions = [{"text":"Retour a l'accueil", "point":"home.index"}]
-    return render_template('base-error.html',
-                           number=404,
-                           message=message,
-                           actions=actions)
+# @app.errorhandler(404)
+# def not_found(e):
+#     print('\n', e)
+#     message = "La page que vous recherchez n'existe plus"
+#     actions = [{"text":"Retour a l'accueil", "point":"home.index"}]
+#     return render_template('base-error.html',
+#                            number=404,
+#                            message=message,
+#                            actions=actions)
 
 
 

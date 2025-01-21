@@ -5,6 +5,7 @@ import json
 from datetime import datetime
 from importlib import import_module
 
+import dash
 import markdown as md
 from flask import Blueprint, render_template
 
@@ -29,6 +30,12 @@ def create_ui(name):
                    static_url_path='/assets')
     return ui
 
+def create_dash(name):
+    ui = dash.Dash(
+            name, 
+            server=app,
+            routes_pathname_prefix=f'/{name}/')
+    return ui
 
 def create_api(name, local_db=None):
     api = Blueprint(name,
@@ -39,7 +46,6 @@ def create_api(name, local_db=None):
     if local_db:
         _LOCAL_DBS.append(name)
     return api
-
 
 
 
@@ -55,7 +61,12 @@ def register_ui():
                 if hasattr(routes, 'ui'):
                     print('registering >', routes.ui)
                     app.register_blueprint(routes.ui)
-                
+            layouts_path = os.path.join(root_dir, name, 'layouts.py')
+            if os.path.isfile(layouts_path):
+                layouts = import_module(f'pages.{name}.layouts')
+                if hasattr(layouts, 'ui'):
+                    print('registering >', layouts.ui)
+
 def register_api():
     root_dir = SERVICES_DIR
     for name in os.listdir(root_dir):
