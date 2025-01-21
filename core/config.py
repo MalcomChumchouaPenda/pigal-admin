@@ -4,6 +4,8 @@ from uuid import uuid4
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+import dash
+# from .theme.dashboard import layout
 
 
 # CONFIGURATION PATHS
@@ -47,3 +49,15 @@ PORTALS = [
     {'nom':'Enseignants', 'id':'teacher'},
     {'nom':'Administration', 'id':'admin'},
 ]
+
+
+# DASHBOARDS CONFIGURATION
+
+prefix = '/dashboard/'
+pages_folder = '../pages/dashboard'
+dashboard = dash.Dash(__name__,
+                      server=app,
+                      use_pages=True,
+                      pages_folder=pages_folder,
+                      routes_pathname_prefix=prefix)
+# dashboard.layout = layout

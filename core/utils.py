@@ -61,11 +61,11 @@ def register_ui():
                 if hasattr(routes, 'ui'):
                     print('registering >', routes.ui)
                     app.register_blueprint(routes.ui)
-            layouts_path = os.path.join(root_dir, name, 'layouts.py')
-            if os.path.isfile(layouts_path):
-                layouts = import_module(f'pages.{name}.layouts')
-                if hasattr(layouts, 'ui'):
-                    print('registering >', layouts.ui)
+            # layouts_path = os.path.join(root_dir, name, 'layouts.py')
+            # if os.path.isfile(layouts_path):
+            #     layouts = import_module(f'pages.{name}.layouts')
+            #     if hasattr(layouts, 'ui'):
+            #         print('registering >', layouts.ui)
 
 def register_api():
     root_dir = SERVICES_DIR

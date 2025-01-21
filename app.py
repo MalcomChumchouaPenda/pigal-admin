@@ -1,13 +1,14 @@
 
-from core.config import app
 from core import utils as utl
+from core.config import app, dashboard
+from core.theme.dashboard import layout
 from pages.home import constants as cst
 
 
 utl.register_api()
 utl.register_ui()
 utl.init_db()
-
+dashboard.layout = layout
 
 @app.context_processor
 def inject_constants():
